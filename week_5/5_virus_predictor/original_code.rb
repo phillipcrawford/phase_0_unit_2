@@ -1,14 +1,27 @@
 # U2.W5: Virus Predictor
 
-# I worked on this challenge [by myself, with: ].
+# I worked on this challenge [by myself].
+
+# EXPLANATION OF program
+# Class VirusPredictor takes 5 parameters. They are called in driver codes, and
+# passed values in hash STATE_DATA. A calculation is made based on the passed in data
+# and output is the number of people who will die from virus outbreak 
 
 # EXPLANATION OF require_relative
-#
-#
+# require_relative requires that a ruby file called state_data' exists. It can then access the
+# data in that file
+
+# EXPLANATION OF state_data file
+# The file state_data has one object in it, a hash named STATE_DATA. STATE_DATA has keys that are 
+# strings, and values that are hashes. These hashes that are values are written in a different notation
+# than the encapsulating hash.
+
 require_relative 'state_data'
 
 class VirusPredictor
 
+# method initialize overwrites default constructor of initialize when VirusPredictor object is created. 5
+# parameters are set to instance variables for use throughout rest of class
   def initialize(state_of_origin, population_density, population, region, regional_spread)
     @state = state_of_origin
     @population = population
@@ -17,14 +30,19 @@ class VirusPredictor
     @next_region = regional_spread
   end
 
-  def virus_effects  #HINT: What is the SCOPE of instance variables?
-    predicted_deaths(@population_density, @population, @state)
-    speed_of_spread(@population_density, @state)
+# method virus_effects is called on a VirusPredictor object. Calls to private methods are made
+  def virus_effects  
+    predicted_deaths()
+    speed_of_spread()
   end
 
-  private  #what is this?  what happens if it were cut and pasted above the virus_effects method
-
-  def predicted_deaths(population_density, population, state)
+  private  #what is this?  what happens if it were cut and pasted above the virus_effects method. All methods
+  # below private for remainder of document can only be called from inside the class. For example if we have a
+  # VirusPredictor object named temp, temp#predicted_deaths will not work because predicted_deaths is private.
+  
+  # predicted_deaths sets variable number_of_deaths to a calculation and prints it out along with state  
+  
+  def predicted_deaths
     if @population_density >= 200
       number_of_deaths = (@population * 0.4).floor
     elsif @population_density >= 150
@@ -41,19 +59,18 @@ class VirusPredictor
 
   end
 
-  def speed_of_spread(population_density, state) #in months
-    speed = 0.0
-
+  # speed_of_spread sets variable speed to a calculation and prinst out that variable
+  def speed_of_spread #in months    
     if @population_density >= 200
-      speed += 0.5
+      speed = 0.5
     elsif @population_density >= 150
-      speed += 1
+      speed = 1
     elsif @population_density >= 100
-      speed += 1.5
+      speed = 1.5
     elsif @population_density >= 50
-      speed += 2
+      speed = 2
     else 
-      speed += 2.5
+      speed = 2.5
     end
 
     puts " and will spread across the state in #{speed} months.\n\n"
@@ -67,7 +84,7 @@ end
 # DRIVER CODE
  # initialize VirusPredictor for each state
 
-
+# for 1..STATE_DATA.length
 alabama = VirusPredictor.new("Alabama", STATE_DATA["Alabama"][:population_density], STATE_DATA["Alabama"][:population], STATE_DATA["Alabama"][:region], STATE_DATA["Alabama"][:regional_spread]) 
 alabama.virus_effects
 
