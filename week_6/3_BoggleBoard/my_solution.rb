@@ -43,19 +43,20 @@ puts "Your row is #{boggle_board.get_row(1)}"
 puts "Your column is #{boggle_board.get_col(2)}"
 
 
-def assert
-	raise "Assertion Failed!" unless yield
-end
 
-assert { boggle_board.create_word([1,2], [1,1], [2,1], [3,2]) == "dock" } # returns "dock"
-assert { boggle_board.create_word([0,1], [1,1], [2,2], [3,3]) == "role" } # returns "trek"
-assert { boggle_board.get_row(3) == ["t", "a", "k", "e"]}
-assert { boggle_board.get_col(1) == ["r", "o", "c", "a"]}
 
 
 # 1. DRIVER TESTS GO BELOW THIS LINE
 # create driver test code to retrieve a value at a coordinate here:
 # implement tests for each of the methods here:
 
+def assert
+	raise "Assertion Failed!" unless yield
+end
+
+assert { boggle_board.create_word([1,2], [1,1], [2,1], [3,2]) == "dock" } # returns "dock"
+assert { boggle_board.create_word([0,1], [1,1], [2,2], [3,3]) == "role" } # returns "role"
+assert { boggle_board.get_row(3) == ["t", "a", "k", "e"]}
+assert { boggle_board.get_col(1) == ["r", "o", "c", "a"]}
 
 # 5. Reflection 
